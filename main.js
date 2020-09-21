@@ -52,6 +52,29 @@ compareToTen(number)
 // reject output in terminal should be
 // Server says: "I'll be right back with your Slurpy"
 // Sever returns: "Sorry, We are all out of Slurpy"
+let order = 'Slurpy';
+const drink = new Promise((resolve, reject) => {
+  console.log(`I'll be right back with your ${order}.`);
+  const orderCannotBeFilled = true;
+
+  if (orderCannotBeFilled) {
+    setTimeout(() => {
+      reject(`Sorry we are all out of ${order}'s`);
+    },2000);
+  } else {
+    setTimeout(() => {
+      resolve(`Server Returns: Here is your ${order}`)
+    },4000)
+  }
+})
+drink.then((response) => {
+  console.log(`${response}`);
+})
+.catch((err) => {
+  console.log(err)
+})
+
+
 
 //3.CHAIN
 //Write two separate functions that return promises
