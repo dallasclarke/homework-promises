@@ -217,7 +217,7 @@ totalSales(json)
 })
 .catch((err) => {
   console.log(err);
-})
+});
 
 // 5. Based on given athletes array
 //a.  Write a function called playerFunction that returns a promise which copies the array into a new array called 'playerArr'.
@@ -271,3 +271,44 @@ let athletes = [
     team: 'NY Giants',
   },
 ];
+
+const playerFunction = (arr) => {
+  return new Promise((resolve, reject) => {
+    const playersArr = [...arr];
+    resolve(playersArr);
+    return playersArr;
+  })
+};
+playerFunction(athletes)
+.then((data) => {
+  // console.log(data)
+  const addedSport = data.map(({name, position,team}) => {
+    return position === 'quarterback' 
+    ? {name, position, team, sport: 'football'} 
+    : position === 'guard' 
+    ? {name, position, team, sport: 'basketball'} 
+    : null 
+  });
+  // console.log(`Sport added: ${addedSport}`)
+  console.log(addedSport);
+  console.log('---------------');
+  return addedSport;
+})
+.then ((players) => {
+  console.log(players);
+  const football = players.filter((obj) => {
+    // console.log(obj)
+    return obj.sport === 'football' 
+    
+  })
+  console.log(football)
+  football.forEach((info) => {
+    let {
+      name,
+      position,
+      team,
+      sport
+    } = info
+    console.log(`${name} plays ${sport} as a ${position} for the ${team}`)
+  })
+})
