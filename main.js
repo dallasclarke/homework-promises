@@ -113,8 +113,11 @@ const sortWords = function(arr) {
     .then((data) => {
       data.sort();
       console.log(data)
-    
     })
+    .catch((err) => {
+      console.log(err);
+    })
+    
 
 
 //4.
@@ -184,7 +187,37 @@ const json = {
     },
   ],
 };
-let totalSales = new Promise()
+const totalSales = function(json) {
+  return new Promise((resolve, reject) => {
+    // const result = (json) ? resolve(json.data) : reject('Error!');
+    //   return result;
+    if (json) {
+      resolve(json.data);
+    } else {
+      reject('Error!')
+    }
+  });
+};
+totalSales(json)
+.then((data) => {
+  const industry = data.filter((ind) => ind.industry === 'Legal')
+  // console.log(industry)
+  return industry
+})
+.then ((newData) => {
+  newData.forEach(({name}) => {
+    console.log(`Contacts from the legal profession: ${name}`);
+  })
+  const total = newData.map((total) => total.sales * .30)
+  // console.log(total)
+  return total;
+})
+.then((total) => {
+  console.log(total.reduce((acc, val) => acc + val))
+})
+.catch((err) => {
+  console.log(err);
+})
 
 // 5. Based on given athletes array
 //a.  Write a function called playerFunction that returns a promise which copies the array into a new array called 'playerArr'.
