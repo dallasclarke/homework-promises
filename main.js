@@ -74,8 +74,6 @@ drink.then((response) => {
   console.log(err)
 })
 
-
-
 //3.CHAIN
 //Write two separate functions that return promises
 // The first function, makeAllCaps(), will take in an array of words and capitalize them.
@@ -86,6 +84,38 @@ drink.then((response) => {
 
 const arrayOfWords = ['cucumber', 'tomatos', 'avocado']; //returns ['CUCUMBER','TOMATOES','AVOCADO']
 const complicatedArray = ['cucumber', 44, true]; //returns "Error Not All Items are strings"
+
+const makeAllCaps = function(arr) {
+  return new Promise((resolve, reject) => {
+    resolve(arr);
+    reject()
+    }
+  )
+};
+let result1 = makeAllCaps(arrayOfWords).then((data) => {
+  // console.log(data);
+  const caps = data.map((elements) => elements.toUpperCase());
+  console.log(caps)
+  return caps;
+})
+.catch(() => console.log('Error, not all items are strings!'));
+
+const sortWords = function(arr) {
+  return new Promise((resolve, reject) => {
+    if (!arr) {
+      reject('Error');
+    } else {
+      resolve(arr);
+    }
+  })
+};        
+    sortWords(result1)
+    .then((data) => {
+      data.sort();
+      console.log(data)
+    
+    })
+
 
 //4.
 // a. Create a variable, totalSales that creates a promise.
@@ -154,8 +184,9 @@ const json = {
     },
   ],
 };
+let totalSales = new Promise()
 
-// 5. Based on given athlets array
+// 5. Based on given athletes array
 //a.  Write a function called playerFunction that returns a promise which copies the array into a new array called 'playerArr'.
 // Make sure your function is re-useable so no hard coded values.
 //b. Now invoke the function
